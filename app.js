@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-    //tarjetasJuego
+document.addEventListener('DOMContentLoaded', () => {    
     const tarjetasJuego = [
         {
             nombre: 'carro',
@@ -51,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ]
 
-    tarjetasJuego.sort(()=>Math.random());//Obtener las tarjetas aleatoriamente
+    tarjetasJuego.sort(()=>0.5-Math.random());//Obtener las tarjetas aleatoriamente
 
     const puntos=document.querySelector('#puntuaje')
     const tablero=document.querySelector('.tablero');
@@ -74,13 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkCoincide(){
         var tarjetas=document.querySelectorAll('img');
         const opcionUnoId=tarjetasElegidasID[0];
-        const opcionDosId=tarjetasElegidasID[1];
-        debugger;
+        const opcionDosId=tarjetasElegidasID[1];           
         
-        if (tarjetasElegidasID[0]==tarjetasElegidasID[1]) {            
-            swal("¡Haz encontrado su par!");
-            tarjetas[opcionUnoId].setAttribute('src','imagenes/blanco.jpg');
-            tarjetas[opcionDosId].setAttribute('src','imagenes/blanco.jpg');
+        if (tarjetasElegidas[0]==tarjetasElegidas[1]) {                
+            swal('¡Haz encontrado su coincidencia!');
+            /*tarjetas[opcionUnoId].setAttribute('src','imagenes/blanco.jpg');
+            tarjetas[opcionDosId].setAttribute('src','imagenes/blanco.jpg');*/
             tarjetasGanadas.push(tarjetasElegidas);
         }else{
             tarjetas[opcionUnoId].setAttribute('src','imagenes/oculto.png');
@@ -96,16 +94,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    //Voltear tarjetasJuego
+    //Voltear tarjetas
     function voltearTarjeta(){
-        var idTarjeta=this.getAttribute('data-id');
-        tarjetasElegidas.push(tarjetasJuego[idTarjeta].name);
-        tarjetasElegidasID.push(idTarjeta);
-        this.setAttribute('src',tarjetasJuego[idTarjeta].img);
+        var idTarjeta=this.getAttribute('data-id');        
+        tarjetasElegidas.push(tarjetasJuego[idTarjeta].nombre);
+        tarjetasElegidasID.push(idTarjeta);             
+        this.setAttribute('src',tarjetasJuego[idTarjeta].img); 
 
-        //Verifica si coinciden las tarjetasJuego
+        //Verifica si coinciden las tarjetas
         if (tarjetasElegidas.length==2) {
-            setTimeout(checkCoincide,500);
+            setTimeout(checkCoincide,100);                        
         }
     }
 
